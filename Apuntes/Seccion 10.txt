@@ -1,0 +1,33 @@
+1) MATERIAL UI
+    Es una libreria visual de react. Intalamos esta componente 
+
+    npm install @material-ui/core
+
+2) HERRAMIENTA Storybook
+
+    Es una herramienta que nos permite ir probando los componentes sin tener que incorporarla a la aplicacion.
+
+    Para iniciar el proceso de intalacion de storybook escribimos en siguiente comando
+    npx -p @storybook/cli sb init 
+
+3) PLUGIN ES7 React/Redux/GraphQL/React-Native snippets
+   
+    Instalamos un plugin que se para Visual Studio Code el cual nos permitira autocompletar las lineas de codigo.
+    Para acceder al un menu de navegacion de los comandos del plugin 
+    Ctr + Alt + r
+
+4) CREANDO EL COMPONENTE CityInfo.jsx   
+
+    Creamos la carpte components y el componente usando el plugin 
+    
+5) APLICANDO ESTILOS CON MATERIAL UI
+
+    El componente material ui es un componete que permite realizar mejoras visuales
+    En el elemento Typography pudismo agregar estilos como display="inline" o variant="h4"
+    Para mas informacion visitar la pagina de material ui y estudiar el componente 
+
+6) INSTALAMOS LA TIPOGRAFIA ROBOTO
+
+    Para la instalacion por consola tipeamos el siguiente codigo
+
+    Si hay algun error se puede tipear npm install e instalara todas la dependencia ya instaladas nuevamente. 

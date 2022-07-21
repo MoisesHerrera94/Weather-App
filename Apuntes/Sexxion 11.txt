@@ -1,0 +1,10 @@
+1) TEST AUTOMATICOS
+    Existen 3 tipos de test. Test unitario, test de integración y test e2e.
+
+2) Probando en test unitario
+    Como ya tenemos intalado en testing en el package.json podemos hacer
+    correr los test tipiendo en la consola 
+    npm test
+
+IMPORTANTE: ESTUDIAR COMPARADORES DE JEST
+ 
