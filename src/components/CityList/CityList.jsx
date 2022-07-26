@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import Alert from '@material-ui/lab/Alert'
 import axios from 'axios'
 import convertUnits from 'convert-units'
 import Grid from '@material-ui/core/Grid'
@@ -30,6 +31,7 @@ const renderCityAndContry = eventOnClickCity => (cityAndCountry, weather) => {
 
 const CityList = ( {cities, onClickCity} ) => {
     const [allWeather, setAllWeather] = useState({})
+    const [error, setError] = useState(null)
 
     useEffect(() => {
       const setWeather = (city, country, countryCode) => {
@@ -50,10 +52,13 @@ const CityList = ( {cities, onClickCity} ) => {
                     const{data, status} = error.response
                     console.log("data", data)
                     console.log("status", status)
+                    setError("Ha ocurrido un error en el servidor del cliete")
                 } else if(error.request){
                     console.log("Server in-accesible o no tengo internet")
+                    setError("Verifique la conexion a internet")
                 } else {
                     console.log("Error imprevisto")
+                    setError("Error al cargar los datos")
                 }
             }
         )
@@ -68,12 +73,17 @@ const CityList = ( {cities, onClickCity} ) => {
 //    const weather = { temperature: 10, state: "sunny" }
     
     return (
-        <List>
+        <div>
             {
-                cities.map(cityAndCountry => renderCityAndContry(onClickCity)(cityAndCountry, 
-                    allWeather[`${cityAndCountry.city}-${cityAndCountry.country}`]))
+                error && <Alert onClose={() => setError(null)} severity="error">{error}</Alert>
             }
-        </List>
+            <List>
+                {
+                    cities.map(cityAndCountry => renderCityAndContry(onClickCity)(cityAndCountry, 
+                        allWeather[`${cityAndCountry.city}-${cityAndCountry.country}`]))
+                }
+            </List>
+        </div>
     )
 }
 

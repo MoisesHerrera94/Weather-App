@@ -7,10 +7,10 @@ export default {
 }
 
 const forecastItemList = [
-    {weekDay:"Lunes", hour:8, state:"sunny", tempeture:22},
-    {weekDay:"Martes", hour:9, state:"fog", tempeture:19},
-    {weekDay:"Miercoles", hour:10, state:"cloud", tempeture:17},
-    {weekDay:"Jueves", hour:11, state:"cloudy", tempeture:16},
+    {weekDay:"Lunes", hour:8, state:"clear", tempeture:22},
+    {weekDay:"Martes", hour:9, state:"snow", tempeture:19},
+    {weekDay:"Miercoles", hour:10, state:"clouds", tempeture:17},
+    {weekDay:"Jueves", hour:11, state:"clouds", tempeture:16},
     {weekDay:"Viernes", hour:12, state:"rain", tempeture:14},
 ]
 export const ForecastExample = () => (
