@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import CityList from './../components/CityList'
 import AppFrame from './../components/AppFrame'
 import Paper from '@material-ui/core/Paper'
+import { CineonToneMapping } from 'three'
 
 const cities = [
     {city:"Buenos Aires", country:"Argentina", countryCode:"AR"},
@@ -14,9 +15,11 @@ const cities = [
 const MainPage = props => {
     const history = useHistory()
 
-    const onClickHandler = () => {
+    const onClickHandler = (city, countryCode) => {
         // history.push permite alterar la URL por programacion
-        history.push("/city")
+        console.log("City", city)
+        console.log("countryCode", countryCode)
+        history.push(`/city/${countryCode}/${city}`)
     }
 
     return (

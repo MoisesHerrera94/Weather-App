@@ -18,7 +18,7 @@ const App = props => {
                         <Route path="/main">
                             <MainPage />
                         </Route>
-                        <Route path="/city">
+                        <Route path="/city/:contryCode/:city">
                             <CityPage />
                         </Route>
                         <Route>

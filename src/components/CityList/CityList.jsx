@@ -10,13 +10,16 @@ import CityInfo from './../CityInfo/CityInfo'
 import Weather from './../Weather/Weather'
 import { Axios } from 'axios'
 
+
+const getCityCode = (city, countryCode) => `${city}-${countryCode}`
+
 const renderCityAndContry = eventOnClickCity => (cityAndCountry, weather) => {
     
-    const { city, country} = cityAndCountry
+    const {city, country, countryCode} = cityAndCountry
 //    const {temperature, state} = weather
 
     return (
-        <ListItem button key={city} onClick={eventOnClickCity}>
+        <ListItem button key={getCityCode(city, countryCode)} onClick={() => eventOnClickCity(city, countryCode)}>
             <Grid container justify="center" alignItems="center">
                 <Grid item md={8} xs={12}>
                     <CityInfo city={city} country={country} />
@@ -34,38 +37,34 @@ const CityList = ( {cities, onClickCity} ) => {
     const [error, setError] = useState(null)
 
     useEffect(() => {
-      const setWeather = (city, country, countryCode) => {
+      const setWeather = async (city, countryCode) => {
         const appid = "bbf341a3554c2a35c384e2b34a7445a2"
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${appid}`
 
-        axios.get(url).then(response => {
+        try {
+            const response = await axios.get(url)
+
             const { data } = response 
             const temperature = Number(convertUnits(data.main.temp).from("K").to("C").toFixed(0))
             const state = data.weather[0].main.toLowerCase()
-            const propName = `${city}-${country}`
+            const propName = getCityCode(city, countryCode)
             const propValue = { temperature, state}
 
             setAllWeather(allWeather => ({...allWeather, [propName]: propValue}))
-        }).catch(
-            error => {
-                if(error.response){
-                    const{data, status} = error.response
-                    console.log("data", data)
-                    console.log("status", status)
-                    setError("Ha ocurrido un error en el servidor del cliete")
-                } else if(error.request){
-                    console.log("Server in-accesible o no tengo internet")
-                    setError("Verifique la conexion a internet")
-                } else {
-                    console.log("Error imprevisto")
-                    setError("Error al cargar los datos")
-                }
+        } catch (error) {
+            if(error.response){
+                const{data, status} = error.response
+                setError("Ha ocurrido un error en el servidor del cliete")
+            } else if(error.request){
+                setError("Verifique la conexion a internet")
+            } else {
+                setError("Error al cargar los datos")
             }
-        )
+        }
       }
 
-      cities.forEach(({city, country, countryCode}) => {
-        setWeather(city, country, countryCode)
+      cities.forEach(({city, countryCode}) => {
+        setWeather(city, countryCode)
       });
     }, [cities])
     
@@ -80,7 +79,7 @@ const CityList = ( {cities, onClickCity} ) => {
             <List>
                 {
                     cities.map(cityAndCountry => renderCityAndContry(onClickCity)(cityAndCountry, 
-                        allWeather[`${cityAndCountry.city}-${cityAndCountry.country}`]))
+                        allWeather[getCityCode(cityAndCountry.city, cityAndCountry.countryCode)]))
                 }
             </List>
         </div>
