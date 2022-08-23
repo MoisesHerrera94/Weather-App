@@ -4,13 +4,9 @@ import CityList from './../components/CityList'
 import AppFrame from './../components/AppFrame'
 import Paper from '@material-ui/core/Paper'
 import { CineonToneMapping } from 'three'
+import { getCities } from '../utils/serviceCities'
 
-const cities = [
-    {city:"Buenos Aires", country:"Argentina", countryCode:"AR"},
-    {city:"Bogota", country:"Colombia", countryCode:"CO"},
-    {city:"Madrid", country:"España", countryCode:"ES"},
-    {city:"Ciudad de Mexico", country:"Mexico", countryCode:"MX"}
-]
+
 
 const MainPage = props => {
     const history = useHistory()
@@ -25,7 +21,7 @@ const MainPage = props => {
     return (
         <AppFrame>
             <Paper elevation={3}>
-                <CityList cities={cities} onClickCity={onClickHandler} />
+                <CityList cities={getCities()} onClickCity={onClickHandler} />
             </Paper>
         </AppFrame>
     )
